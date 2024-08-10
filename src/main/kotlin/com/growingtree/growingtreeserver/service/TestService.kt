@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service
 @Service
 @RequiredArgsConstructor
 class TestService {
-    fun getTest() : String {
+    fun getTest(): String {
         return "Hello World"
     }
 }
