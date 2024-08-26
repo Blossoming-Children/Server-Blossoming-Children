@@ -2,6 +2,8 @@ package com.growingtree.growingtreeserver.service
 
 import com.growingtree.growingtreeserver.dto.stamps.mapper.toGoalsResponseMapper
 import com.growingtree.growingtreeserver.dto.stamps.response.GetGoalsResponse
+import com.growingtree.growingtreeserver.exception.CommonException
+import com.growingtree.growingtreeserver.exception.messages.ErrorMessage
 import com.growingtree.growingtreeserver.repository.GoalsRepository
 import com.growingtree.growingtreeserver.repository.UsersRepository
 import lombok.RequiredArgsConstructor
@@ -14,11 +16,15 @@ class StampServiceImpl(
     val goalsRepository: GoalsRepository,
 ) : StampService {
     override fun getGoals(userId: Long): GetGoalsResponse {
-        val goals =
-            goalsRepository.findGoalsByUserId(userId).map {
-                it.toGoalsResponseMapper()
-            }
-        val stampCount = usersRepository.findUsersById(userId).stampCount
-        return GetGoalsResponse(userId, stampCount, goals)
+        try {
+            val goals =
+                goalsRepository.findGoalsByUserId(userId).map {
+                    it.toGoalsResponseMapper()
+                }
+            val stampCount = usersRepository.findUsersById(userId).stampCount
+            return GetGoalsResponse(userId, stampCount, goals)
+        } catch (e: Exception) {
+            throw CommonException(ErrorMessage.FAILED_GET_STAMP_INFO)
+        }
     }
 }
