@@ -6,6 +6,7 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
+import java.util.Date
 
 @Entity
 @Table(name = "Users")
@@ -17,4 +18,8 @@ data class Users(
     val name: String,
     @Column
     val stampCount: Int,
+    @Column
+    val createdAt: Date,
+    @Column
+    val updatedAt: Date,
 )
