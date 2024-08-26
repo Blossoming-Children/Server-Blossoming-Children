@@ -13,7 +13,7 @@ data class BaseResponse<T>(
     val result: T,
 ) {
     companion object {
-        fun <T> of(
+        fun of(
             successMessage: SuccessMessage,
         ): BaseResponse<*> {
             return BaseResponse<Any?>(successMessage.status, successMessage.message, null)
