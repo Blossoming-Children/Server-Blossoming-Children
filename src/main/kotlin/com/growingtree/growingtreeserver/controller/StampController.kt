@@ -5,6 +5,7 @@ import com.growingtree.growingtreeserver.exception.responses.BaseResponse
 import com.growingtree.growingtreeserver.service.StampService
 import lombok.RequiredArgsConstructor
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -21,5 +22,13 @@ class StampController(
     ): BaseResponse<*> {
         val response = stampService.getGoals(userId)
         return BaseResponse.of(SuccessMessage.SUCCESS_GET_STAMP_INFO, response)
+    }
+
+    @PostMapping("")
+    fun addStamp(
+        @RequestHeader("Authorization") userId: Long,
+    ): BaseResponse<*> {
+        stampService.addStamp(userId)
+        return BaseResponse.of(SuccessMessage.SUCCESS_ADD_STAMP)
     }
 }

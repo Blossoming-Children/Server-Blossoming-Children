@@ -6,6 +6,7 @@ import com.growingtree.growingtreeserver.exception.CustomException
 import com.growingtree.growingtreeserver.exception.messages.ErrorMessage
 import com.growingtree.growingtreeserver.repository.GoalsRepository
 import com.growingtree.growingtreeserver.repository.UsersRepository
+import jakarta.transaction.Transactional
 import lombok.RequiredArgsConstructor
 import org.springframework.stereotype.Service
 
@@ -25,6 +26,15 @@ class StampServiceImpl(
             return GetGoalsResponse(userId, stampCount, goals)
         } catch (e: Exception) {
             throw CustomException(ErrorMessage.FAILED_GET_STAMP_INFO)
+        }
+    }
+
+    @Transactional
+    override fun addStamp(userId: Long) {
+        try {
+            usersRepository.updateUsersById(userId)
+        } catch (e: Exception) {
+            throw CustomException(ErrorMessage.FAILED_ADD_STAMP)
         }
     }
 }
