@@ -17,7 +17,7 @@ import lombok.NoArgsConstructor
 data class Goals(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long?,
     @Column
     val userId: Long,
     @Column
