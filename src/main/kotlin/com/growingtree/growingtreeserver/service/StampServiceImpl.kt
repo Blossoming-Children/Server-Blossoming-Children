@@ -1,5 +1,6 @@
 package com.growingtree.growingtreeserver.service
 
+import com.growingtree.growingtreeserver.domain.Goals
 import com.growingtree.growingtreeserver.dto.stamps.mapper.toGoalsResponseMapper
 import com.growingtree.growingtreeserver.dto.stamps.response.GetGoalsResponse
 import com.growingtree.growingtreeserver.exception.CustomException
@@ -44,6 +45,32 @@ class StampServiceImpl(
             usersRepository.findUsersById(userId)
         } catch (e: Exception) {
             throw CustomException(ErrorMessage.USER_NOT_FOUND)
+        }
+    }
+
+    @Transactional
+    override fun patchGoals(userId: Long, targetStamps: Int, detail: String) {
+        findUser(userId)
+        val goal: Goals? = findGoalDetail(userId, targetStamps)
+
+        try {
+            if (goal != null) {
+                goal.id?.let { goalsRepository.updateGoalsById(goalId = it, detail = detail) }
+            } else {
+                goalsRepository.save(
+                    Goals(id = null, userId = userId, targetStamps = targetStamps, detail = detail)
+                )
+            }
+        } catch (e:Exception) {
+            throw CustomException(ErrorMessage.FAILED_UPDATE_GOAL)
+        }
+    }
+
+    private fun findGoalDetail(userId: Long, targetStamps: Int): Goals? {
+        try {
+            return goalsRepository.findGoalsByUserIdAndTargetStamps(userId, targetStamps)
+        } catch (e: Exception) {
+            throw CustomException(ErrorMessage.SERVER_CONNECT_FAIL)
         }
     }
 }
