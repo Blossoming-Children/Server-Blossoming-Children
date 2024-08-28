@@ -7,5 +7,9 @@ interface StampService {
 
     fun addStamp(userId: Long)
 
-    fun patchGoals(userId: Long, targetStamps: Int, detail: String)
+    fun patchGoals(
+        userId: Long,
+        targetStamps: Int,
+        detail: String,
+    )
 }

@@ -10,9 +10,15 @@ interface GoalsRepository : JpaRepository<Goals, Long> {
     fun findGoalsByUserId(userId: Long): List<Goals>
 
     @Query("select g from Goals g where g.userId = :userId and g.targetStamps = :targetStamps")
-    fun findGoalsByUserIdAndTargetStamps(userId: Long, targetStamps: Int): Goals?
+    fun findGoalsByUserIdAndTargetStamps(
+        userId: Long,
+        targetStamps: Int,
+    ): Goals?
 
     @Modifying
     @Query("update Goals set detail = :detail where id = :goalId")
-    fun updateGoalsById(goalId: Long, detail: String)
+    fun updateGoalsById(
+        goalId: Long,
+        detail: String,
+    )
 }

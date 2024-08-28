@@ -13,5 +13,5 @@ enum class ErrorMessage(
     USER_NOT_FOUND(404, "사용자를 찾을 수 없습니다."),
 
     // SERVER
-    SERVER_CONNECT_FAIL(501, "서버 연결에 실패했습니다.")
+    SERVER_CONNECT_FAIL(501, "서버 연결에 실패했습니다."),
 }

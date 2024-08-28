@@ -49,7 +49,11 @@ class StampServiceImpl(
     }
 
     @Transactional
-    override fun patchGoals(userId: Long, targetStamps: Int, detail: String) {
+    override fun patchGoals(
+        userId: Long,
+        targetStamps: Int,
+        detail: String,
+    ) {
         findUser(userId)
         val goal: Goals? = findGoalDetail(userId, targetStamps)
 
@@ -58,15 +62,23 @@ class StampServiceImpl(
                 goal.id?.let { goalsRepository.updateGoalsById(goalId = it, detail = detail) }
             } else {
                 goalsRepository.save(
-                    Goals(id = null, userId = userId, targetStamps = targetStamps, detail = detail)
+                    Goals(
+                        id = null,
+                        userId = userId,
+                        targetStamps = targetStamps,
+                        detail = detail,
+                    ),
                 )
             }
-        } catch (e:Exception) {
+        } catch (e: Exception) {
             throw CustomException(ErrorMessage.FAILED_UPDATE_GOAL)
         }
     }
 
-    private fun findGoalDetail(userId: Long, targetStamps: Int): Goals? {
+    private fun findGoalDetail(
+        userId: Long,
+        targetStamps: Int,
+    ): Goals? {
         try {
             return goalsRepository.findGoalsByUserIdAndTargetStamps(userId, targetStamps)
         } catch (e: Exception) {
