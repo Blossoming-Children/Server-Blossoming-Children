@@ -12,4 +12,9 @@ interface StampService {
         targetStamps: Int,
         detail: String,
     )
+
+    fun deleteGoals(
+        userId: Long,
+        targetStamps: Int,
+    )
 }

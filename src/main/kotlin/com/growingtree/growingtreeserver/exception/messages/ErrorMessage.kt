@@ -8,6 +8,9 @@ enum class ErrorMessage(
     FAILED_GET_STAMP_INFO(404, "도장판 정보 불러오기를 실패했습니다."),
     FAILED_ADD_STAMP(404, "도장 추가를 실패했습니다"),
     FAILED_UPDATE_GOAL(404, "목표 수정을 실패했습니다."),
+    FAILED_DELETE_GOAL(404, "목표 삭제를 실패했습니다."),
+
+    GOAL_NOT_FOUND(404, "목표를 찾을 수 없습니다."),
 
     // USER
     USER_NOT_FOUND(404, "사용자를 찾을 수 없습니다."),

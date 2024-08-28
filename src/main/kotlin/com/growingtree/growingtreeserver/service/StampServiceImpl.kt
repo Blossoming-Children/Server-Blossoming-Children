@@ -40,14 +40,6 @@ class StampServiceImpl(
         }
     }
 
-    private fun findUser(userId: Long) {
-        try {
-            usersRepository.findUsersById(userId)
-        } catch (e: Exception) {
-            throw CustomException(ErrorMessage.USER_NOT_FOUND)
-        }
-    }
-
     @Transactional
     override fun patchGoals(
         userId: Long,
@@ -72,6 +64,33 @@ class StampServiceImpl(
             }
         } catch (e: Exception) {
             throw CustomException(ErrorMessage.FAILED_UPDATE_GOAL)
+        }
+    }
+
+    @Transactional
+    override fun deleteGoals(
+        userId: Long,
+        targetStamps: Int,
+    ) {
+        findUser(userId)
+        try {
+            with(goalsRepository.findGoalsByUserIdAndTargetStamps(userId, targetStamps)) {
+                if (this != null) {
+                    goalsRepository.delete(this)
+                } else {
+                    throw CustomException(ErrorMessage.GOAL_NOT_FOUND)
+                }
+            }
+        } catch (e: Exception) {
+            throw CustomException(ErrorMessage.FAILED_DELETE_GOAL)
+        }
+    }
+
+    private fun findUser(userId: Long) {
+        try {
+            usersRepository.findUsersById(userId)
+        } catch (e: Exception) {
+            throw CustomException(ErrorMessage.USER_NOT_FOUND)
         }
     }
 

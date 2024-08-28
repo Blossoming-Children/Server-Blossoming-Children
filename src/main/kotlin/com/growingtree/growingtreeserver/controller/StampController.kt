@@ -5,8 +5,10 @@ import com.growingtree.growingtreeserver.exception.messages.SuccessMessage
 import com.growingtree.growingtreeserver.exception.responses.BaseResponse
 import com.growingtree.growingtreeserver.service.StampService
 import lombok.RequiredArgsConstructor
+import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestHeader
@@ -42,5 +44,14 @@ class StampController(
     ): BaseResponse<*> {
         stampService.patchGoals(userId = userId, targetStamps = patchGoalsRequest.targetStamps, detail = patchGoalsRequest.goalDetail)
         return BaseResponse.of(SuccessMessage.SUCCESS_UPDATE_GOAL)
+    }
+
+    @DeleteMapping("/{targetStamp}")
+    fun deleteGoal(
+        @RequestHeader("Authorization") userId: Long,
+        @PathVariable("targetStamp") targetStamp: Int,
+    ): BaseResponse<*> {
+        stampService.deleteGoals(userId, targetStamp)
+        return BaseResponse.of(SuccessMessage.SUCCESS_DELETE_GOAL)
     }
 }
