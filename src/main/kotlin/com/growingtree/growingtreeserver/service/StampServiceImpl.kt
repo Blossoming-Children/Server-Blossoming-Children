@@ -31,10 +31,19 @@ class StampServiceImpl(
 
     @Transactional
     override fun addStamp(userId: Long) {
+        findUser(userId)
         try {
             usersRepository.updateUsersById(userId)
         } catch (e: Exception) {
             throw CustomException(ErrorMessage.FAILED_ADD_STAMP)
+        }
+    }
+
+    private fun findUser(userId: Long) {
+        try {
+            usersRepository.findUsersById(userId)
+        } catch (e: Exception) {
+            throw CustomException(ErrorMessage.USER_NOT_FOUND)
         }
     }
 }
