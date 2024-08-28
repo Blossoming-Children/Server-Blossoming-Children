@@ -43,11 +43,11 @@ class StampServiceImpl(
     @Transactional
     override fun patchGoals(
         userId: Long,
-        targetStamps: Int,
+        targetStamp: Int,
         detail: String,
     ) {
         findUser(userId)
-        val goal: Goals? = findGoalDetail(userId, targetStamps)
+        val goal: Goals? = findGoalDetail(userId, targetStamp)
 
         try {
             if (goal != null) {
@@ -57,7 +57,7 @@ class StampServiceImpl(
                     Goals(
                         id = null,
                         userId = userId,
-                        targetStamps = targetStamps,
+                        targetStamp = targetStamp,
                         detail = detail,
                     ),
                 )
@@ -70,11 +70,11 @@ class StampServiceImpl(
     @Transactional
     override fun deleteGoals(
         userId: Long,
-        targetStamps: Int,
+        targetStamp: Int,
     ) {
         findUser(userId)
         try {
-            with(goalsRepository.findGoalsByUserIdAndTargetStamps(userId, targetStamps)) {
+            with(goalsRepository.findGoalsByUserIdAndTargetStamp(userId, targetStamp)) {
                 if (this != null) {
                     goalsRepository.delete(this)
                 } else {
@@ -96,10 +96,10 @@ class StampServiceImpl(
 
     private fun findGoalDetail(
         userId: Long,
-        targetStamps: Int,
+        targetStamp: Int,
     ): Goals? {
         try {
-            return goalsRepository.findGoalsByUserIdAndTargetStamps(userId, targetStamps)
+            return goalsRepository.findGoalsByUserIdAndTargetStamp(userId, targetStamp)
         } catch (e: Exception) {
             throw CustomException(ErrorMessage.SERVER_CONNECT_FAIL)
         }

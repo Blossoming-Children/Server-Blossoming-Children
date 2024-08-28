@@ -21,7 +21,7 @@ data class Goals(
     @Column
     val userId: Long,
     @Column
-    val targetStamps: Int,
+    val targetStamp: Int,
     @Column
     val detail: String,
 )

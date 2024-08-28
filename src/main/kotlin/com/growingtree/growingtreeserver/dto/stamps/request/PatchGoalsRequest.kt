@@ -1,6 +1,6 @@
 package com.growingtree.growingtreeserver.dto.stamps.request
 
 data class PatchGoalsRequest(
-    val targetStamps: Int,
+    val targetStamp: Int,
     val goalDetail: String,
 )

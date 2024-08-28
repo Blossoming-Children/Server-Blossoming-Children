@@ -9,12 +9,12 @@ interface StampService {
 
     fun patchGoals(
         userId: Long,
-        targetStamps: Int,
+        targetStamp: Int,
         detail: String,
     )
 
     fun deleteGoals(
         userId: Long,
-        targetStamps: Int,
+        targetStamp: Int,
     )
 }

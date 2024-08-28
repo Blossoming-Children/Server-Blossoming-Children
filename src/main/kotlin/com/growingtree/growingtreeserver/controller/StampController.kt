@@ -42,7 +42,7 @@ class StampController(
         @RequestHeader("Authorization") userId: Long,
         @RequestBody patchGoalsRequest: PatchGoalsRequest,
     ): BaseResponse<*> {
-        stampService.patchGoals(userId = userId, targetStamps = patchGoalsRequest.targetStamps, detail = patchGoalsRequest.goalDetail)
+        stampService.patchGoals(userId = userId, targetStamp = patchGoalsRequest.targetStamp, detail = patchGoalsRequest.goalDetail)
         return BaseResponse.of(SuccessMessage.SUCCESS_UPDATE_GOAL)
     }
 

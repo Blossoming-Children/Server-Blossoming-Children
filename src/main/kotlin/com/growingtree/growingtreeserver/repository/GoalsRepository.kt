@@ -9,10 +9,10 @@ interface GoalsRepository : JpaRepository<Goals, Long> {
     @Query("select g from Goals g where g.userId = :userId")
     fun findGoalsByUserId(userId: Long): List<Goals>
 
-    @Query("select g from Goals g where g.userId = :userId and g.targetStamps = :targetStamps")
-    fun findGoalsByUserIdAndTargetStamps(
+    @Query("select g from Goals g where g.userId = :userId and g.targetStamp = :targetStamp")
+    fun findGoalsByUserIdAndTargetStamp(
         userId: Long,
-        targetStamps: Int,
+        targetStamp: Int,
     ): Goals?
 
     @Modifying

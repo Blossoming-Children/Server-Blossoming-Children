@@ -6,7 +6,7 @@ data class GetGoalsResponse(
     val goals: List<Goals>,
 ) {
     data class Goals(
-        val targetStamps: Int,
+        val targetStamp: Int,
         val detail: String,
     )
 }

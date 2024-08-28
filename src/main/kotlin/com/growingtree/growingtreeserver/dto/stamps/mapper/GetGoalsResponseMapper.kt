@@ -5,6 +5,6 @@ import com.growingtree.growingtreeserver.dto.stamps.response.GetGoalsResponse
 
 fun Goals.toGoalsResponseMapper(): GetGoalsResponse.Goals =
     GetGoalsResponse.Goals(
-        targetStamps = this.targetStamps,
+        targetStamp = this.targetStamp,
         detail = this.detail,
     )
