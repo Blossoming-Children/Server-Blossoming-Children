@@ -4,6 +4,7 @@ plugins {
     id("org.springframework.boot") version "3.3.2"
     id("io.spring.dependency-management") version "1.1.6"
     id("org.jlleitschuh.gradle.ktlint") version "12.0.3"
+    kotlin("plugin.jpa") version "1.9.24"
 }
 
 group = "com.growingtree"
@@ -35,6 +36,13 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testRuntimeOnly("org.junit.platform:junit-platform-launcher")
+
+    // jdbc
+    implementation("org.springframework.boot:spring-boot-starter-jdbc")
+
+    // jpa
+    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+    runtimeOnly("com.mysql:mysql-connector-j")
 }
 
 kotlin {
