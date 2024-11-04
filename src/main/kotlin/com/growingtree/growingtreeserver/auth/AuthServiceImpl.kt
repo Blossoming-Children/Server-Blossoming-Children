@@ -85,6 +85,22 @@ class AuthServiceImpl(
         }
     }
 
+    @Transactional
+    override fun resetPassword(
+        email: String,
+        password: String,
+    ) {
+        usersRepository.findUsersByEmail(email) ?: throw CustomException(ErrorMessage.USER_NOT_FOUND)
+
+        isPasswordValid(password)
+
+        try {
+            usersRepository.updatePasswordByEmail(email, password)
+        } catch (e: Exception) {
+            throw CustomException(ErrorMessage.FAILED_RESET_PASSWORD)
+        }
+    }
+
     private fun isUserExist(email: String): Boolean = usersRepository.findUsersByEmail(email) == null
 
     private fun createCode(): String {

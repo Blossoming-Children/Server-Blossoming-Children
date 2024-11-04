@@ -5,6 +5,7 @@ import com.growingtree.growingtreeserver.exception.messages.SuccessMessage
 import com.growingtree.growingtreeserver.exception.responses.BaseResponse
 import lombok.RequiredArgsConstructor
 import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PatchMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
@@ -47,5 +48,13 @@ class AuthController(
     ): BaseResponse<*> {
         authService.findEmail(email)
         return BaseResponse.of(SuccessMessage.SUCCESS_FIND_EMAIL, "")
+    }
+
+    @PatchMapping("reset-password")
+    fun resetPassword(
+        @RequestBody signUpRequest: SignUpRequest,
+    ): BaseResponse<*> {
+        authService.resetPassword(signUpRequest.email, signUpRequest.password)
+        return BaseResponse.of(SuccessMessage.SUCCESS_RESET_PASSWORD, "")
     }
 }

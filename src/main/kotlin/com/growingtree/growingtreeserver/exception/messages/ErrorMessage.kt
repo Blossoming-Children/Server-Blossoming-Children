@@ -10,6 +10,7 @@ enum class ErrorMessage(
     INVALID_EMAIL(404, "이메일 형식이 맞지 않습니다."),
     INVALID_PASSWORD(404, "비밀번호 형식이 맞지 않습니다."),
     FAILED_SIGN_IN(404, "회원정보가 일치하지 않습니다."),
+    FAILED_RESET_PASSWORD(404, "비밀번호 재설정에 실패했습니다."),
 
     // STAMP
     FAILED_GET_STAMP_INFO(404, "도장판 정보 불러오기를 실패했습니다."),
