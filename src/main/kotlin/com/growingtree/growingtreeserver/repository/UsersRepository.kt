@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query
 interface UsersRepository : JpaRepository<Users, Long> {
     fun findUsersById(id: Long): Users
 
+    fun findUsersByEmail(email: String): Users?
+
     @Modifying
     @Query("update Users set stampCount = stampCount + 1, updatedAt = now() where id = :id")
     fun updateUsersById(id: Long)
