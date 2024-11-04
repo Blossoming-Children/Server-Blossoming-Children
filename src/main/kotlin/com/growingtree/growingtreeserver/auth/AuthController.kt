@@ -30,4 +30,12 @@ class AuthController(
         authService.signUp(signUpRequest.email, signUpRequest.password)
         return BaseResponse.of(SuccessMessage.SUCCESS_SIGN_UP, "")
     }
+
+    @PostMapping("/sign-in")
+    fun signIn(
+        @RequestBody signUpRequest: SignUpRequest,
+    ): BaseResponse<*> {
+        val signInResponse = authService.signIn(signUpRequest.email, signUpRequest.password)
+        return BaseResponse.of(SuccessMessage.SUCCESS_SIGN_IN, signInResponse)
+    }
 }

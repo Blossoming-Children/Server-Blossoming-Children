@@ -1,5 +1,6 @@
 package com.growingtree.growingtreeserver.auth
 
+import com.growingtree.growingtreeserver.auth.model.response.SignInResponse
 import com.growingtree.growingtreeserver.domain.Users
 import com.growingtree.growingtreeserver.exception.CustomException
 import com.growingtree.growingtreeserver.exception.messages.ErrorMessage
@@ -62,6 +63,19 @@ class AuthServiceImpl(
             )
         } catch (e: Exception) {
             throw CustomException(ErrorMessage.FAILED_SIGN_UP)
+        }
+    }
+
+    override fun signIn(
+        email: String,
+        password: String,
+    ): SignInResponse {
+        val user = usersRepository.findUsersByEmail(email)
+        when {
+            user == null -> throw CustomException(ErrorMessage.FAILED_SIGN_IN)
+            user.email != email -> throw CustomException(ErrorMessage.FAILED_SIGN_IN)
+            user.password != password -> throw CustomException(ErrorMessage.FAILED_SIGN_IN)
+            else -> return SignInResponse(user.id ?: -1)
         }
     }
 

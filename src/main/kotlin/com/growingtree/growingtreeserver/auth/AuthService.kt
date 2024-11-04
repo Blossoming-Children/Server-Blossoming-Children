@@ -1,5 +1,7 @@
 package com.growingtree.growingtreeserver.auth
 
+import com.growingtree.growingtreeserver.auth.model.response.SignInResponse
+
 interface AuthService {
     fun sendCode(email: String): String
 
@@ -7,4 +9,9 @@ interface AuthService {
         email: String,
         password: String,
     )
+
+    fun signIn(
+        email: String,
+        password: String,
+    ): SignInResponse
 }
