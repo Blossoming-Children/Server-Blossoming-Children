@@ -4,6 +4,9 @@ enum class SuccessMessage(
     val status: Int,
     val message: String,
 ) {
+    // AUTH
+    SUCCESS_SEND_MAIL(200, "메일 전송에 성공했습니다."),
+
     // STAMP
     SUCCESS_GET_STAMP_INFO(200, "도장판 정보 불러오기를 성공했습니다."),
     SUCCESS_ADD_STAMP(200, "도장 추가를 성공했습니다."),
