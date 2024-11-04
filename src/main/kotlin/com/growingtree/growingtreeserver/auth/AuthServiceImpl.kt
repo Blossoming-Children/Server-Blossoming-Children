@@ -50,6 +50,9 @@ class AuthServiceImpl(
             throw CustomException(ErrorMessage.USER_EXIST)
         }
 
+        isEmailValid(email)
+        isPasswordValid(password)
+
         try {
             usersRepository.save(
                 Users(
@@ -74,5 +77,31 @@ class AuthServiceImpl(
         val context = Context()
         context.setVariable("code", code)
         return templateEngine.process("ValidationCodeTemplate", context)
+    }
+
+    private fun isEmailValid(email: String): Boolean {
+        if (email.contains(EMAIL_REGEX.toRegex())) {
+            return true
+        } else {
+            throw CustomException(ErrorMessage.INVALID_EMAIL)
+        }
+    }
+
+    private fun isPasswordValid(password: String): Boolean {
+        when {
+            password.length < PASSWORD_LENGTH_MIN -> throw CustomException(ErrorMessage.INVALID_PASSWORD)
+            !password.contains(UPPER_CASE_REGEX.toRegex()) && !password.contains(LOWER_CASE_REGEX.toRegex()) -> throw CustomException(ErrorMessage.INVALID_PASSWORD)
+            !password.contains(NUMBER_REGEX.toRegex()) -> throw CustomException(ErrorMessage.INVALID_PASSWORD)
+            else -> return true
+        }
+    }
+
+    companion object {
+        private const val PASSWORD_LENGTH_MIN = 10
+
+        private const val EMAIL_REGEX = "^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\$"
+        private const val UPPER_CASE_REGEX = "[A-Z]"
+        private const val LOWER_CASE_REGEX = "[a-z]"
+        private const val NUMBER_REGEX = "[0-9]"
     }
 }
