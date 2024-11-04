@@ -13,7 +13,7 @@ import java.util.Date
 data class Users(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: String,
+    val id: Long,
     @Column
     val email: String,
     @Column

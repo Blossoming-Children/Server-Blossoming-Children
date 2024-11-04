@@ -2,6 +2,7 @@ package com.growingtree.growingtreeserver.auth
 
 import com.growingtree.growingtreeserver.exception.CustomException
 import com.growingtree.growingtreeserver.exception.messages.ErrorMessage
+import com.growingtree.growingtreeserver.repository.UsersRepository
 import lombok.RequiredArgsConstructor
 import org.springframework.mail.javamail.JavaMailSenderImpl
 import org.springframework.mail.javamail.MimeMessageHelper
@@ -12,6 +13,7 @@ import org.thymeleaf.spring6.SpringTemplateEngine
 @Service
 @RequiredArgsConstructor
 class AuthServiceImpl(
+    private val usersRepository: UsersRepository,
     private val mailSender: JavaMailSenderImpl,
     private val templateEngine: SpringTemplateEngine,
 ) : AuthService {
@@ -19,6 +21,10 @@ class AuthServiceImpl(
         val authCode = createCode()
         val mailContent = mailSender.createMimeMessage()
         val title = "아이조아 - 본인 인증 코드입니다."
+
+        if (usersRepository.findUsersByEmail(email) == null) {
+            throw CustomException(ErrorMessage.USER_EXIST)
+        }
 
         try {
             val mimeMessageHelper = MimeMessageHelper(mailContent, false, "utf-8")
