@@ -6,6 +6,7 @@ enum class ErrorMessage(
 ) {
     // AUTH
     FAILED_SENDING_MAIL(404, "인증메일 전송을 실패했습니다."),
+    FAILED_SIGN_UP(404, "회원가입을 실패했습니다."),
 
     // STAMP
     FAILED_GET_STAMP_INFO(404, "도장판 정보 불러오기를 실패했습니다."),

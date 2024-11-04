@@ -1,8 +1,10 @@
 package com.growingtree.growingtreeserver.auth
 
+import com.growingtree.growingtreeserver.domain.Users
 import com.growingtree.growingtreeserver.exception.CustomException
 import com.growingtree.growingtreeserver.exception.messages.ErrorMessage
 import com.growingtree.growingtreeserver.repository.UsersRepository
+import jakarta.transaction.Transactional
 import lombok.RequiredArgsConstructor
 import org.springframework.mail.javamail.JavaMailSenderImpl
 import org.springframework.mail.javamail.MimeMessageHelper
@@ -22,7 +24,7 @@ class AuthServiceImpl(
         val mailContent = mailSender.createMimeMessage()
         val title = "아이조아 - 본인 인증 코드입니다."
 
-        if (usersRepository.findUsersByEmail(email) == null) {
+        if (!isUserExist(email)) {
             throw CustomException(ErrorMessage.USER_EXIST)
         }
 
@@ -38,6 +40,29 @@ class AuthServiceImpl(
             throw CustomException(ErrorMessage.FAILED_SENDING_MAIL)
         }
     }
+
+    @Transactional
+    override fun signUp(
+        email: String,
+        password: String,
+    ) {
+        if (!isUserExist(email)) {
+            throw CustomException(ErrorMessage.USER_EXIST)
+        }
+
+        try {
+            usersRepository.save(
+                Users(
+                    email = email,
+                    password = password,
+                ),
+            )
+        } catch (e: Exception) {
+            throw CustomException(ErrorMessage.FAILED_SIGN_UP)
+        }
+    }
+
+    private fun isUserExist(email: String): Boolean = usersRepository.findUsersByEmail(email) == null
 
     private fun createCode(): String {
         val charset = ('0'..'9') + ('a'..'z') + ('A'..'Z')

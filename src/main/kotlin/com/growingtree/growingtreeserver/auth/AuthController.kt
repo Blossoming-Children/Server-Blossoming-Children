@@ -1,5 +1,6 @@
 package com.growingtree.growingtreeserver.auth
 
+import com.growingtree.growingtreeserver.auth.model.request.SignUpRequest
 import com.growingtree.growingtreeserver.exception.messages.SuccessMessage
 import com.growingtree.growingtreeserver.exception.responses.BaseResponse
 import lombok.RequiredArgsConstructor
@@ -12,11 +13,21 @@ import org.springframework.web.bind.annotation.RestController
 @RequestMapping("/api/auth")
 @RequiredArgsConstructor
 class AuthController(
-    val authService: AuthService
+    val authService: AuthService,
 ) {
     @PostMapping("/validate-email")
-    fun validateEmail(@RequestBody email: String): BaseResponse<*> {
+    fun validateEmail(
+        @RequestBody email: String,
+    ): BaseResponse<*> {
         val authCode = authService.sendCode(email)
         return BaseResponse.of(SuccessMessage.SUCCESS_SEND_MAIL, authCode)
+    }
+
+    @PostMapping("/sign-up")
+    fun signUp(
+        @RequestBody signUpRequest: SignUpRequest,
+    ): BaseResponse<*> {
+        authService.signUp(signUpRequest.email, signUpRequest.password)
+        return BaseResponse.of(SuccessMessage.SUCCESS_SIGN_UP, "")
     }
 }
