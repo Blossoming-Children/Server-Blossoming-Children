@@ -4,9 +4,11 @@ import com.growingtree.growingtreeserver.auth.model.request.SignUpRequest
 import com.growingtree.growingtreeserver.exception.messages.SuccessMessage
 import com.growingtree.growingtreeserver.exception.responses.BaseResponse
 import lombok.RequiredArgsConstructor
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 
 @RestController
@@ -37,5 +39,13 @@ class AuthController(
     ): BaseResponse<*> {
         val signInResponse = authService.signIn(signUpRequest.email, signUpRequest.password)
         return BaseResponse.of(SuccessMessage.SUCCESS_SIGN_IN, signInResponse)
+    }
+
+    @GetMapping("/find-email")
+    fun findEmail(
+        @RequestParam email: String,
+    ): BaseResponse<*> {
+        authService.findEmail(email)
+        return BaseResponse.of(SuccessMessage.SUCCESS_FIND_EMAIL, "")
     }
 }

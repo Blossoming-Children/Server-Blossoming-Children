@@ -14,4 +14,6 @@ interface AuthService {
         email: String,
         password: String,
     ): SignInResponse
+
+    fun findEmail(email: String)
 }

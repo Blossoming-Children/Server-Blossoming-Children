@@ -8,6 +8,7 @@ enum class SuccessMessage(
     SUCCESS_SEND_MAIL(200, "메일 전송에 성공했습니다."),
     SUCCESS_SIGN_UP(201, "회원가입에 성공했습니다."),
     SUCCESS_SIGN_IN(200, "로그인에 성공했습니다."),
+    SUCCESS_FIND_EMAIL(200, "회원 조회에 성공했습니다."),
 
     // STAMP
     SUCCESS_GET_STAMP_INFO(200, "도장판 정보 불러오기를 성공했습니다."),

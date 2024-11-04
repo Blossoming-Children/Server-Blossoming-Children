@@ -79,6 +79,12 @@ class AuthServiceImpl(
         }
     }
 
+    override fun findEmail(email: String) {
+        if (isUserExist(email)) {
+            throw CustomException(ErrorMessage.USER_NOT_FOUND)
+        }
+    }
+
     private fun isUserExist(email: String): Boolean = usersRepository.findUsersByEmail(email) == null
 
     private fun createCode(): String {
