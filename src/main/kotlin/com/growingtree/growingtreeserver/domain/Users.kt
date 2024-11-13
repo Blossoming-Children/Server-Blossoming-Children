@@ -6,20 +6,24 @@ import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
-import java.util.Date
+import java.time.LocalDateTime
 
 @Entity
 @Table(name = "Users")
 data class Users(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long,
+    val id: Long? = null,
+    @Column
+    val email: String,
+    @Column
+    val password: String,
     @Column
     val name: String,
     @Column
-    val stampCount: Int,
+    val stampCount: Int = 0,
+    @Column(updatable = false)
+    val createdAt: LocalDateTime = LocalDateTime.now(),
     @Column
-    val createdAt: Date,
-    @Column
-    val updatedAt: Date,
+    val updatedAt: LocalDateTime = LocalDateTime.now(),
 )
