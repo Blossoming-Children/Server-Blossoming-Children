@@ -26,6 +26,7 @@ enum class ErrorMessage(
 
     // MY-PAGE
     FAILED_WITHDRAW(404, "계정 탈퇴를 실패했습니다."),
+    INCORRECT_PASSWORD(400, "비밀번호가 일치하지 않습니다."),
 
     // SERVER
     SERVER_CONNECT_FAIL(501, "서버 연결에 실패했습니다."),

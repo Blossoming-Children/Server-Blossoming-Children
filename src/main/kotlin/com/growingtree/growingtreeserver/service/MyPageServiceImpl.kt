@@ -11,11 +11,19 @@ class MyPageServiceImpl(
     val usersRepository: UsersRepository,
 ) : MyPageService {
     @Transactional
-    override fun withdraw(userId: Long) {
-        try {
-            usersRepository.findUsersById(userId)
-        } catch (e: Exception) {
-            throw CustomException(ErrorMessage.USER_NOT_FOUND)
+    override fun withdraw(
+        userId: Long,
+        password: String,
+    ) {
+        val user =
+            try {
+                usersRepository.findUsersById(userId)
+            } catch (e: Exception) {
+                throw CustomException(ErrorMessage.USER_NOT_FOUND)
+            }
+
+        if (user.password != password) {
+            throw CustomException(ErrorMessage.INCORRECT_PASSWORD)
         }
 
         try {
