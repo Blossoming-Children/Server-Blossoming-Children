@@ -1,5 +1,6 @@
 package com.growingtree.growingtreeserver.auth
 
+import com.growingtree.growingtreeserver.auth.model.enums.ValidateType
 import com.growingtree.growingtreeserver.auth.model.response.SignInResponse
 import com.growingtree.growingtreeserver.domain.Users
 import com.growingtree.growingtreeserver.exception.CustomException
@@ -20,12 +21,15 @@ class AuthServiceImpl(
     private val mailSender: JavaMailSenderImpl,
     private val templateEngine: SpringTemplateEngine,
 ) : AuthService {
-    override fun sendCode(email: String): String {
+    override fun sendCode(
+        validateType: ValidateType,
+        email: String,
+    ): String {
         val authCode = createCode()
         val mailContent = mailSender.createMimeMessage()
         val title = "아이조아 - 본인 인증 코드입니다."
 
-        if (!isUserExist(email)) {
+        if (validateType == ValidateType.SIGN_UP && !isUserExist(email)) {
             throw CustomException(ErrorMessage.USER_EXIST)
         }
 

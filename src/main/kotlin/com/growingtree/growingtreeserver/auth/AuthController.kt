@@ -1,6 +1,8 @@
 package com.growingtree.growingtreeserver.auth
 
+import com.growingtree.growingtreeserver.auth.model.request.SendCodeRequest
 import com.growingtree.growingtreeserver.auth.model.request.SignUpRequest
+import com.growingtree.growingtreeserver.auth.model.response.SendCodeResponse
 import com.growingtree.growingtreeserver.exception.messages.SuccessMessage
 import com.growingtree.growingtreeserver.exception.responses.BaseResponse
 import lombok.RequiredArgsConstructor
@@ -20,10 +22,14 @@ class AuthController(
 ) {
     @PostMapping("/validate-email")
     fun validateEmail(
-        @RequestBody email: String,
+        @RequestBody sendCodeRequest: SendCodeRequest,
     ): BaseResponse<*> {
-        val authCode = authService.sendCode(email)
-        return BaseResponse.of(SuccessMessage.SUCCESS_SEND_MAIL, authCode)
+        val authCode =
+            authService.sendCode(
+                sendCodeRequest.validateType,
+                sendCodeRequest.email,
+            )
+        return BaseResponse.of(SuccessMessage.SUCCESS_SEND_MAIL, SendCodeResponse(authCode))
     }
 
     @PostMapping("/sign-up")

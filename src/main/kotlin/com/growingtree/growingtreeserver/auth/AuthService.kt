@@ -1,9 +1,13 @@
 package com.growingtree.growingtreeserver.auth
 
+import com.growingtree.growingtreeserver.auth.model.enums.ValidateType
 import com.growingtree.growingtreeserver.auth.model.response.SignInResponse
 
 interface AuthService {
-    fun sendCode(email: String): String
+    fun sendCode(
+        validateType: ValidateType,
+        email: String,
+    ): String
 
     fun signUp(
         email: String,
