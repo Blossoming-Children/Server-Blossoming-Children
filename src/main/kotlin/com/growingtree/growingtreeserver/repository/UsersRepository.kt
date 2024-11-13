@@ -20,4 +20,10 @@ interface UsersRepository : JpaRepository<Users, Long> {
         email: String,
         password: String,
     )
+
+    @Modifying
+    @Query("delete from Users where id = :userId")
+    fun deleteUsersById(
+        userId: Long,
+    )
 }

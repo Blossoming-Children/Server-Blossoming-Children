@@ -24,6 +24,9 @@ enum class ErrorMessage(
     USER_NOT_FOUND(400, "사용자를 찾을 수 없습니다."),
     USER_EXIST(400, "이미 존재하는 이메일입니다."),
 
+    // MY-PAGE
+    FAILED_WITHDRAW(404, "계정 탈퇴를 실패했습니다."),
+
     // SERVER
     SERVER_CONNECT_FAIL(501, "서버 연결에 실패했습니다."),
 }

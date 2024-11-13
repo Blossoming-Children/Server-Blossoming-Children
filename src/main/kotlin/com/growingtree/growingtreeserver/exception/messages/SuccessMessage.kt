@@ -16,4 +16,7 @@ enum class SuccessMessage(
     SUCCESS_ADD_STAMP(201, "도장 추가를 성공했습니다."),
     SUCCESS_UPDATE_GOAL(201, "목표 수정을 성공했습니다."),
     SUCCESS_DELETE_GOAL(200, "목표 삭제를 성공했습니다."),
+
+    // MY-PAGE
+    SUCCESS_WITHDRAW(200, "계정 탈퇴에 성공했습니다."),
 }
