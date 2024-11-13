@@ -1,9 +1,9 @@
-package com.growingtree.growingtreeserver.auth
+package com.growingtree.growingtreeserver.service
 
-import com.growingtree.growingtreeserver.auth.model.enums.ValidateType
-import com.growingtree.growingtreeserver.auth.model.response.SignInResponse
 import com.growingtree.growingtreeserver.domain.Motions
 import com.growingtree.growingtreeserver.domain.Users
+import com.growingtree.growingtreeserver.dto.auth.response.SignInResponse
+import com.growingtree.growingtreeserver.enums.ValidateType
 import com.growingtree.growingtreeserver.exception.CustomException
 import com.growingtree.growingtreeserver.exception.messages.ErrorMessage
 import com.growingtree.growingtreeserver.repository.MotionsRepository
@@ -63,13 +63,14 @@ class AuthServiceImpl(
         isPasswordValid(password)
 
         try {
-            val userId = usersRepository.save(
-                Users(
-                    email = email,
-                    password = password,
-                    name = nickname,
-                ),
-            ).id
+            val userId =
+                usersRepository.save(
+                    Users(
+                        email = email,
+                        password = password,
+                        name = nickname,
+                    ),
+                ).id
 
             println(userId)
 
@@ -77,7 +78,7 @@ class AuthServiceImpl(
                 motionsRepository.save(
                     Motions(
                         userId = userId,
-                    )
+                    ),
                 )
             } else {
                 throw CustomException(ErrorMessage.FAILED_SIGN_UP)
