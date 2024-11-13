@@ -1,10 +1,12 @@
-package com.growingtree.growingtreeserver.auth
+package com.growingtree.growingtreeserver.service
 
-import com.growingtree.growingtreeserver.auth.model.enums.ValidateType
-import com.growingtree.growingtreeserver.auth.model.response.SignInResponse
+import com.growingtree.growingtreeserver.domain.Motions
 import com.growingtree.growingtreeserver.domain.Users
+import com.growingtree.growingtreeserver.dto.auth.response.SignInResponse
+import com.growingtree.growingtreeserver.enums.ValidateType
 import com.growingtree.growingtreeserver.exception.CustomException
 import com.growingtree.growingtreeserver.exception.messages.ErrorMessage
+import com.growingtree.growingtreeserver.repository.MotionsRepository
 import com.growingtree.growingtreeserver.repository.UsersRepository
 import jakarta.transaction.Transactional
 import lombok.RequiredArgsConstructor
@@ -18,6 +20,7 @@ import org.thymeleaf.spring6.SpringTemplateEngine
 @RequiredArgsConstructor
 class AuthServiceImpl(
     private val usersRepository: UsersRepository,
+    private val motionsRepository: MotionsRepository,
     private val mailSender: JavaMailSenderImpl,
     private val templateEngine: SpringTemplateEngine,
 ) : AuthService {
@@ -60,13 +63,26 @@ class AuthServiceImpl(
         isPasswordValid(password)
 
         try {
-            usersRepository.save(
-                Users(
-                    email = email,
-                    password = password,
-                    name = nickname,
-                ),
-            )
+            val userId =
+                usersRepository.save(
+                    Users(
+                        email = email,
+                        password = password,
+                        name = nickname,
+                    ),
+                ).id
+
+            println(userId)
+
+            if (userId != null) {
+                motionsRepository.save(
+                    Motions(
+                        userId = userId,
+                    ),
+                )
+            } else {
+                throw CustomException(ErrorMessage.FAILED_SIGN_UP)
+            }
         } catch (e: Exception) {
             throw CustomException(ErrorMessage.FAILED_SIGN_UP)
         }
