@@ -41,7 +41,7 @@ class AuthController(
             signUpRequest.password,
             signUpRequest.nickname,
         )
-        return BaseResponse.of(SuccessMessage.SUCCESS_SIGN_UP, "")
+        return BaseResponse.of(SuccessMessage.SUCCESS_SIGN_UP)
     }
 
     @PostMapping("/sign-in")
