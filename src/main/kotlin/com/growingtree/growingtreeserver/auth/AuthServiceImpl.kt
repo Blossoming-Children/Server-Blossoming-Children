@@ -50,6 +50,7 @@ class AuthServiceImpl(
     override fun signUp(
         email: String,
         password: String,
+        nickname: String,
     ) {
         if (!isUserExist(email)) {
             throw CustomException(ErrorMessage.USER_EXIST)
@@ -63,6 +64,7 @@ class AuthServiceImpl(
                 Users(
                     email = email,
                     password = password,
+                    name = nickname,
                 ),
             )
         } catch (e: Exception) {

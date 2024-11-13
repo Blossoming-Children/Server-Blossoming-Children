@@ -36,7 +36,11 @@ class AuthController(
     fun signUp(
         @RequestBody signUpRequest: SignUpRequest,
     ): BaseResponse<*> {
-        authService.signUp(signUpRequest.email, signUpRequest.password)
+        authService.signUp(
+            signUpRequest.email,
+            signUpRequest.password,
+            signUpRequest.nickname,
+        )
         return BaseResponse.of(SuccessMessage.SUCCESS_SIGN_UP, "")
     }
 

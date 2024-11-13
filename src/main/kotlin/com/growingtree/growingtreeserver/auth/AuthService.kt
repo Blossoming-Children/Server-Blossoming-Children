@@ -12,6 +12,7 @@ interface AuthService {
     fun signUp(
         email: String,
         password: String,
+        nickname: String,
     )
 
     fun signIn(

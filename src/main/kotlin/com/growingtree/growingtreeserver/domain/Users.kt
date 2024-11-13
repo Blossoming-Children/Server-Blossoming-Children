@@ -19,7 +19,7 @@ data class Users(
     @Column
     val password: String,
     @Column
-    val name: String = "새싹",
+    val name: String,
     @Column
     val stampCount: Int = 0,
     @Column(updatable = false)
