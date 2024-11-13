@@ -1,10 +1,11 @@
-package com.growingtree.growingtreeserver.auth
+package com.growingtree.growingtreeserver.controller
 
-import com.growingtree.growingtreeserver.auth.model.request.SendCodeRequest
-import com.growingtree.growingtreeserver.auth.model.request.SignUpRequest
-import com.growingtree.growingtreeserver.auth.model.response.SendCodeResponse
+import com.growingtree.growingtreeserver.dto.auth.request.SendCodeRequest
+import com.growingtree.growingtreeserver.dto.auth.request.SignUpRequest
+import com.growingtree.growingtreeserver.dto.auth.response.SendCodeResponse
 import com.growingtree.growingtreeserver.exception.messages.SuccessMessage
 import com.growingtree.growingtreeserver.exception.responses.BaseResponse
+import com.growingtree.growingtreeserver.service.AuthService
 import lombok.RequiredArgsConstructor
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PatchMapping
@@ -41,7 +42,7 @@ class AuthController(
             signUpRequest.password,
             signUpRequest.nickname,
         )
-        return BaseResponse.of(SuccessMessage.SUCCESS_SIGN_UP, "")
+        return BaseResponse.of(SuccessMessage.SUCCESS_SIGN_UP)
     }
 
     @PostMapping("/sign-in")

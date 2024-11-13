@@ -1,4 +1,4 @@
-package com.growingtree.growingtreeserver.auth.model.request
+package com.growingtree.growingtreeserver.dto.auth.request
 
 data class SignUpRequest(
     val email: String,

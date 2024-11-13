@@ -1,7 +1,7 @@
-package com.growingtree.growingtreeserver.auth
+package com.growingtree.growingtreeserver.service
 
-import com.growingtree.growingtreeserver.auth.model.enums.ValidateType
-import com.growingtree.growingtreeserver.auth.model.response.SignInResponse
+import com.growingtree.growingtreeserver.dto.auth.response.SignInResponse
+import com.growingtree.growingtreeserver.enums.ValidateType
 
 interface AuthService {
     fun sendCode(

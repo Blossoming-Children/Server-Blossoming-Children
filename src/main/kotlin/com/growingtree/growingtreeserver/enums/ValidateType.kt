@@ -1,4 +1,4 @@
-package com.growingtree.growingtreeserver.auth.model.enums
+package com.growingtree.growingtreeserver.enums
 
 enum class ValidateType {
     SIGN_UP,
