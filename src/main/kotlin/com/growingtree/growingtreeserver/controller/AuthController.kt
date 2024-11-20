@@ -1,6 +1,7 @@
 package com.growingtree.growingtreeserver.controller
 
 import com.growingtree.growingtreeserver.dto.auth.request.SendCodeRequest
+import com.growingtree.growingtreeserver.dto.auth.request.SignInRequest
 import com.growingtree.growingtreeserver.dto.auth.request.SignUpRequest
 import com.growingtree.growingtreeserver.dto.auth.response.SendCodeResponse
 import com.growingtree.growingtreeserver.exception.messages.SuccessMessage
@@ -47,9 +48,9 @@ class AuthController(
 
     @PostMapping("/sign-in")
     fun signIn(
-        @RequestBody signUpRequest: SignUpRequest,
+        @RequestBody signInRequest: SignInRequest,
     ): BaseResponse<*> {
-        val signInResponse = authService.signIn(signUpRequest.email, signUpRequest.password)
+        val signInResponse = authService.signIn(signInRequest.email, signInRequest.password)
         return BaseResponse.of(SuccessMessage.SUCCESS_SIGN_IN, signInResponse)
     }
 
