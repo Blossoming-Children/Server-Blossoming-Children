@@ -24,6 +24,12 @@ enum class ErrorMessage(
     USER_NOT_FOUND(400, "사용자를 찾을 수 없습니다."),
     USER_EXIST(400, "이미 존재하는 이메일입니다."),
 
+    // MY-PAGE
+    FAILED_WITHDRAW(404, "계정 탈퇴를 실패했습니다."),
+    INCORRECT_PASSWORD(400, "비밀번호가 일치하지 않습니다."),
+    FAILED_GET_MOTIONS_INFO(400, "동작 교육 횟수 정보 불러오기를 실패했습니다."),
+    FAILED_UPDATE_NAME(400, "이름 수정을 실패했습니다."),
+
     // SERVER
     SERVER_CONNECT_FAIL(501, "서버 연결에 실패했습니다."),
 }
