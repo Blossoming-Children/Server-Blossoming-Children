@@ -9,4 +9,9 @@ interface MyPageService {
     )
 
     fun getUserProfile(userId: Long): GetUserInfoResponse
+
+    fun patchUserProfile(
+        userId: Long,
+        nickname: String,
+    )
 }

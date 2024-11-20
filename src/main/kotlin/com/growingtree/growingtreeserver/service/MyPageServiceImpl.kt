@@ -53,6 +53,19 @@ class MyPageServiceImpl(
         )
     }
 
+    @Transactional
+    override fun patchUserProfile(
+        userId: Long,
+        nickname: String,
+    ) {
+        try {
+            usersRepository.updateNameById(userId, nickname)
+        } catch (e: Exception) {
+            e.printStackTrace()
+            throw CustomException(ErrorMessage.FAILED_UPDATE_NAME)
+        }
+    }
+
     private fun findUser(userId: Long): Users {
         try {
             return usersRepository.findUsersById(userId)

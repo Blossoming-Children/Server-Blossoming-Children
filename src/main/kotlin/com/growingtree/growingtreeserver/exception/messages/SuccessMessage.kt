@@ -20,4 +20,5 @@ enum class SuccessMessage(
     // MY-PAGE
     SUCCESS_WITHDRAW(200, "계정 탈퇴에 성공했습니다."),
     SUCCESS_GET_PROFILE(200, "프로필 정보 조회를 성공했습니다."),
+    SUCCESS_PATCH_NAME(200, "이름 수정을 성공했습니다."),
 }

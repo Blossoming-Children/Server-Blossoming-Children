@@ -22,6 +22,13 @@ interface UsersRepository : JpaRepository<Users, Long> {
     )
 
     @Modifying
+    @Query("update Users set name = :name where id = :userId")
+    fun updateNameById(
+        userId: Long,
+        name: String,
+    )
+
+    @Modifying
     @Query("delete from Users where id = :userId")
     fun deleteUsersById(
         userId: Long,
