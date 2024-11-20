@@ -1,6 +1,5 @@
 package com.growingtree.growingtreeserver.domain
 
-import com.growingtree.growingtreeserver.enums.Motion
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
 import jakarta.persistence.GeneratedValue
@@ -20,8 +19,6 @@ data class Videos(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-    @Column
-    val type: Enum<Motion>,
     @Column
     val url: String,
     @Column
