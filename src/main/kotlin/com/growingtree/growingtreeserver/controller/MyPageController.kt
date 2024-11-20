@@ -6,6 +6,7 @@ import com.growingtree.growingtreeserver.exception.responses.BaseResponse
 import com.growingtree.growingtreeserver.service.MyPageService
 import lombok.RequiredArgsConstructor
 import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestHeader
 import org.springframework.web.bind.annotation.RequestMapping
@@ -24,5 +25,13 @@ class MyPageController(
     ): BaseResponse<*> {
         myPageService.withdraw(userId, withdrawRequest.password)
         return BaseResponse.of(SuccessMessage.SUCCESS_WITHDRAW)
+    }
+
+    @GetMapping("/profile")
+    fun getUserProfile(
+        @RequestHeader("Authorization") userId: Long,
+    ): BaseResponse<*> {
+        val getUserInfoResponse = myPageService.getUserProfile(userId)
+        return BaseResponse.of(SuccessMessage.SUCCESS_GET_PROFILE, getUserInfoResponse)
     }
 }
