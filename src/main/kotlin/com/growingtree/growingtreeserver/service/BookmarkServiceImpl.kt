@@ -14,7 +14,10 @@ class BookmarkServiceImpl(
     private val bookmarksRepository: BookmarksRepository,
 ) : BookmarkService {
     @Transactional
-    override fun postBookmark(userId: Long, eduId: Long) {
+    override fun postBookmark(
+        userId: Long,
+        eduId: Long,
+    ) {
         if (isBookmarkExist(userId, eduId)) throw CustomException(ErrorMessage.FAILED_POST_BOOKMARK)
         try {
             bookmarksRepository.save(Bookmarks(userId = userId, eduId = eduId))
@@ -24,11 +27,24 @@ class BookmarkServiceImpl(
         }
     }
 
-    override fun deleteBookmark(userId: Long, eduId: Long) {
-        TODO("Not yet implemented")
+    override fun deleteBookmark(
+        userId: Long,
+        eduId: Long,
+    ) {
+        try {
+            bookmarksRepository.findBookmarksByUserIdAndEduId(userId, eduId).apply {
+                if (this == null) throw CustomException(ErrorMessage.FAILED_DELETE_BOOKMARK)
+                bookmarksRepository.delete(this)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            throw CustomException(ErrorMessage.FAILED_DELETE_BOOKMARK)
+        }
     }
 
-    private fun isBookmarkExist(userId: Long, eduId: Long): Boolean =
+    private fun isBookmarkExist(
+        userId: Long,
+        eduId: Long,
+    ): Boolean =
         bookmarksRepository.findBookmarksByUserIdAndEduId(userId, eduId) != null
-
 }
