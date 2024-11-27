@@ -5,9 +5,9 @@ import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.Query
 
 interface AchievementsRepository : JpaRepository<Achievements, Long> {
-    @Query("select g from Achievements g where g.userId = :userId and g.videoId = :videoId")
-    fun getAchievementByUserIdAndVideoId(
+    @Query("select g from Achievements g where g.userId = :userId and g.eduId = :eduId")
+    fun getAchievementByUserIdAndEduId(
         userId: Long,
-        videoId: Long,
+        eduId: Long,
     ): Achievements?
 }

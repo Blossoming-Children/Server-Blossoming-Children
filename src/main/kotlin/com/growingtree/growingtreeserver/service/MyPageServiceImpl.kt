@@ -9,9 +9,9 @@ import com.growingtree.growingtreeserver.exception.CustomException
 import com.growingtree.growingtreeserver.exception.messages.ErrorMessage
 import com.growingtree.growingtreeserver.repository.AchievementsRepository
 import com.growingtree.growingtreeserver.repository.BookmarksRepository
+import com.growingtree.growingtreeserver.repository.EducationsRepository
 import com.growingtree.growingtreeserver.repository.MotionsRepository
 import com.growingtree.growingtreeserver.repository.UsersRepository
-import com.growingtree.growingtreeserver.repository.VideosRepository
 import jakarta.transaction.Transactional
 import org.springframework.stereotype.Service
 
@@ -21,7 +21,7 @@ class MyPageServiceImpl(
     private val motionsRepository: MotionsRepository,
     private val bookmarksRepository: BookmarksRepository,
     private val achievementsRepository: AchievementsRepository,
-    private val videosRepository: VideosRepository,
+    private val educationRepository: EducationsRepository,
 ) : MyPageService {
     @Transactional
     override fun withdraw(
@@ -121,11 +121,11 @@ class MyPageServiceImpl(
             val bookmarksList = mutableListOf<Bookmark>()
 
             for (bookmark in bookmarkList) {
-                val videoInfo = videosRepository.findVideosById(bookmark.videoId)
+                val videoInfo = educationRepository.findEducationsById(bookmark.eduId)
                 val achievement =
-                    achievementsRepository.getAchievementByUserIdAndVideoId(
+                    achievementsRepository.getAchievementByUserIdAndEduId(
                         userId = userId,
-                        videoId = bookmark.videoId,
+                        eduId = bookmark.eduId,
                     )?.progress ?: 0
                 bookmarksList.add(
                     Bookmark(

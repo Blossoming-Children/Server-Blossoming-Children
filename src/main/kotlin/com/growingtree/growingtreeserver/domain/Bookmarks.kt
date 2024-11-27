@@ -22,7 +22,7 @@ data class Bookmarks(
     @Column
     val userId: Long,
     @Column
-    val videoId: Long,
+    val eduId: Long,
     @Column(updatable = false)
     val createdAt: LocalDateTime = LocalDateTime.now(),
     @Column

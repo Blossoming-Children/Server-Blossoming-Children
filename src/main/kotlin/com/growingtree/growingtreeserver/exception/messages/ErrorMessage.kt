@@ -30,6 +30,9 @@ enum class ErrorMessage(
     FAILED_GET_MOTIONS_INFO(400, "동작 교육 횟수 정보 불러오기를 실패했습니다."),
     FAILED_UPDATE_NAME(400, "이름 수정을 실패했습니다."),
 
+    // VIDEO
+    FAILED_GET_VIDEO_INFO(404, "영상 정보 받아오기를 실패했습니다"),
+
     // SERVER
     SERVER_CONNECT_FAIL(501, "서버 연결에 실패했습니다."),
 }
