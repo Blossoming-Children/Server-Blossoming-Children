@@ -21,4 +21,7 @@ enum class SuccessMessage(
     SUCCESS_WITHDRAW(200, "계정 탈퇴에 성공했습니다."),
     SUCCESS_GET_PROFILE(200, "프로필 정보 조회를 성공했습니다."),
     SUCCESS_PATCH_NAME(200, "이름 수정을 성공했습니다."),
+
+    // VIDEO
+    SUCCESS_GET_VIDEO(200, "교육영상 정보 불러오기를 성공했습니다."),
 }
