@@ -13,6 +13,7 @@ data class GetUserInfoResponse(
     )
 
     data class Bookmark(
+        val eduId: Long,
         val title: String,
         val videoUrl: String,
         val achievementRate: Int,

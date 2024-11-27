@@ -33,6 +33,11 @@ enum class ErrorMessage(
     // VIDEO
     FAILED_GET_VIDEO_INFO(404, "영상 정보 받아오기를 실패했습니다"),
 
+    // BOOKMARK
+    FAILED_POST_BOOKMARK(200, "북마크 추가에 실패했습니다"),
+    FAILED_DELETE_BOOKMARK(200, "북마크 삭제에 실패했습니다"),
+    FAILED_GET_BOOKMARK(200, "북마크 정보 불러오기를 실패했습니다"),
+
     // SERVER
     SERVER_CONNECT_FAIL(501, "서버 연결에 실패했습니다."),
 }
