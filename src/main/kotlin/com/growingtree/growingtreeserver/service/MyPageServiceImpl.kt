@@ -139,7 +139,7 @@ class MyPageServiceImpl(
             return bookmarksList
         } catch (e: Exception) {
             e.printStackTrace()
-            throw CustomException(ErrorMessage.FAILED_WITHDRAW)
+            throw CustomException(ErrorMessage.FAILED_GET_BOOKMARK)
         }
     }
 }
