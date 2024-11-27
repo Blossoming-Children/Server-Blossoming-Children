@@ -52,7 +52,7 @@ class VideoServiceImpl(
         val list = mutableListOf<GetEducationsResponse>()
         try {
             for (i in educationsList) {
-                val isBookmarked = bookmarksRepository.findBookmarksByUserIdAAndEduId(userId, i.id ?: 0)
+                val isBookmarked = bookmarksRepository.findBookmarksByUserIdAndEduId(userId, i.id ?: 0)
                 val progress = achievementsRepository.getAchievementByUserIdAndEduId(userId, i.id ?: 0)
                 list.add(
                     GetEducationsResponse(

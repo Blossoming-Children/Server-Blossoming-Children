@@ -24,4 +24,8 @@ enum class SuccessMessage(
 
     // VIDEO
     SUCCESS_GET_VIDEO(200, "교육영상 정보 불러오기를 성공했습니다."),
+
+    // BOOKMARK
+    SUCCESS_POST_BOOKMARK(200, "북마크 추가에 성공했습니다"),
+    SUCCESS_DELETE_BOOKMARK(200, "북마크 삭제에 성공했습니다"),
 }

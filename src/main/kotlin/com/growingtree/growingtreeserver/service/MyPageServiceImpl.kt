@@ -129,6 +129,7 @@ class MyPageServiceImpl(
                     )?.progress ?: 0
                 bookmarksList.add(
                     Bookmark(
+                        eduId = videoInfo.id ?: 0,
                         title = videoInfo.title,
                         videoUrl = videoInfo.url,
                         achievementRate = achievement,
@@ -139,7 +140,7 @@ class MyPageServiceImpl(
             return bookmarksList
         } catch (e: Exception) {
             e.printStackTrace()
-            throw CustomException(ErrorMessage.FAILED_WITHDRAW)
+            throw CustomException(ErrorMessage.FAILED_GET_BOOKMARK)
         }
     }
 }
