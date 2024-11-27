@@ -22,7 +22,7 @@ data class Achievements(
     @Column
     val userId: Long,
     @Column
-    val videoId: Long,
+    val eduId: Long,
     @Column
     val progress: Int,
     @Column(updatable = false)

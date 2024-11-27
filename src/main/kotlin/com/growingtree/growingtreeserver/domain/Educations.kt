@@ -11,22 +11,17 @@ import lombok.AllArgsConstructor
 import lombok.NoArgsConstructor
 import java.time.LocalDateTime
 
-@Entity(name = "Videos")
+@Entity(name = "Educations")
 @NoArgsConstructor(access = PROTECTED)
 @AllArgsConstructor
-@Table(name = "Videos")
-data class Videos(
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+@Table(name = "Educations")
+data class Educations(
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long? = null,
-    @Column
-    val eduId: String,
-    @Column
-    val url: String,
     @Column
     val title: String,
     @Column
-    val description: String,
+    val url: String,
     @Column(updatable = false)
     val createdAt: LocalDateTime = LocalDateTime.now(),
     @Column
