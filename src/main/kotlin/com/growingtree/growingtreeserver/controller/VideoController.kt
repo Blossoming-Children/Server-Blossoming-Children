@@ -26,6 +26,7 @@ class VideoController(
 
     @GetMapping("/{eduId}")
     fun getVideoDetail(
+        @RequestHeader("Authorization") userId: Long,
         @PathVariable eduId: Long,
     ): BaseResponse<*> {
         val getVideosResponse = videoService.getVideos(eduId)
