@@ -32,6 +32,7 @@ enum class ErrorMessage(
 
     // VIDEO
     FAILED_GET_VIDEO_INFO(404, "영상 정보 받아오기를 실패했습니다"),
+    FAILED_UPDATE_MOTIONS(404, "동작 교육 횟수 추가를 실패했습니다"),
 
     // BOOKMARK
     FAILED_POST_BOOKMARK(200, "북마크 추가에 실패했습니다"),
