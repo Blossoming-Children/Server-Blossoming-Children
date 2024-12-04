@@ -10,4 +10,11 @@ interface AchievementsRepository : JpaRepository<Achievements, Long> {
         userId: Long,
         eduId: Long,
     ): Achievements?
+
+    @Query("update Achievements g set g.progress = :progress where g.userId = :userId and g.eduId = :eduId")
+    fun updateProgressByUserIdAndEduId(
+        userId: Long,
+        eduId: Long,
+        progress: Int,
+    )
 }
