@@ -13,4 +13,10 @@ interface VideoService {
         userId: Long,
         motion: Motion,
     )
+
+    fun patchEducationProgress(
+        userId: Long,
+        educationId: Long,
+        progress: Int,
+    )
 }

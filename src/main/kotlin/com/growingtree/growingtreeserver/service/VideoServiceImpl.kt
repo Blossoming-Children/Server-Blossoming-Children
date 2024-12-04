@@ -1,5 +1,6 @@
 package com.growingtree.growingtreeserver.service
 
+import com.growingtree.growingtreeserver.domain.Achievements
 import com.growingtree.growingtreeserver.domain.Educations
 import com.growingtree.growingtreeserver.dto.video.response.GetEducationDetailResponse
 import com.growingtree.growingtreeserver.dto.video.response.GetEducationsResponse
@@ -63,6 +64,36 @@ class VideoServiceImpl(
         } catch (e: Exception) {
             e.printStackTrace()
             throw CustomException(ErrorMessage.FAILED_UPDATE_MOTIONS)
+        }
+    }
+
+    @Transactional
+    override fun patchEducationProgress(
+        userId: Long,
+        educationId: Long,
+        progress: Int,
+    ) {
+        try {
+            val education = achievementsRepository.getAchievementByUserIdAndEduId(userId, educationId)
+
+            if (education != null) {
+                achievementsRepository.updateProgressByUserIdAndEduId(
+                    userId = userId,
+                    eduId = educationId,
+                    progress = progress,
+                )
+            } else {
+                achievementsRepository.save(
+                    Achievements(
+                        userId = userId,
+                        eduId = educationId,
+                        progress = progress,
+                    ),
+                )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            throw CustomException(ErrorMessage.FAILED_UPDATE_ACHIEVEMENT)
         }
     }
 

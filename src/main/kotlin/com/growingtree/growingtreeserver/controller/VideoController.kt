@@ -1,5 +1,6 @@
 package com.growingtree.growingtreeserver.controller
 
+import com.growingtree.growingtreeserver.dto.video.request.PatchAchievementRequest
 import com.growingtree.growingtreeserver.dto.video.request.PatchMotionCountRequest
 import com.growingtree.growingtreeserver.exception.messages.SuccessMessage
 import com.growingtree.growingtreeserver.exception.responses.BaseResponse
@@ -46,5 +47,18 @@ class VideoController(
             motion = patchMotionCountRequest.motion,
         )
         return BaseResponse.of(SuccessMessage.SUCCESS_UPDATE_MOTION_COUNT)
+    }
+
+    @PatchMapping("achievement")
+    fun patchAchievement(
+        @RequestHeader("Authorization") userId: Long,
+        @RequestBody patchAchievementRequest: PatchAchievementRequest,
+    ): BaseResponse<*> {
+        videoService.patchEducationProgress(
+            userId = userId,
+            educationId = patchAchievementRequest.eduId,
+            progress = patchAchievementRequest.progress,
+        )
+        return BaseResponse.of(SuccessMessage.SUCCESS_UPDATE_ACHIEVEMENT)
     }
 }
